@@ -1,0 +1,26 @@
+---
+- name: Create S3 buckets with bucket policy
+  vars:
+    s3_bucket_prefix: "crda-dev"
+    s3_buckets:
+      - "{{ s3_bucket_prefix }}-bayesian-core-artifacts"
+      - "{{ s3_bucket_prefix }}-bayesian-core-data"
+      - "{{ s3_bucket_prefix }}-bayesian-core-package-data"
+      - "{{ s3_bucket_prefix }}-bayesian-core-maven-index"
+      - "{{ s3_bucket_prefix }}-3scale-assets-z"
+
+  tasks:
+    - name: Create S3 buckets
+      amazon.aws.s3_bucket:
+        name: "{{ s3_bucket_name }}"
+        region: "{{ aws_region }}"
+        state: present
+        policy: "{{ lookup('ansible.builtin.template', 's3-policy.json.j2') }}"
+        public_access:
+          block_public_acls: true
+          block_public_policy: true
+          ignore_public_acls: true
+          restrict_public_buckets: true
+      loop: "{{ s3_buckets }}"
+      loop_control:
+        loop_var: s3_bucket_name

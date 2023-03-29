@@ -1,0 +1,27 @@
+---
+- name: Delete S3 buckets
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ansible_python_interpreter: ../infra-deploy/bin/python
+    aws_region: "eu-north-1"
+    aws_iam_user: "crda-deployer"
+    aws_account_id: "790531666491"
+    aws_iam_user_arn: "arn:aws:iam::{{ aws_account_id }}:user/{{ aws_iam_user }}"
+    s3_bucket_prefix: "crda-dev"
+    s3_buckets:
+      - "{{ s3_bucket_prefix }}-bayesian-core-artifacts"
+      - "{{ s3_bucket_prefix }}-bayesian-core-data"
+      - "{{ s3_bucket_prefix }}-bayesian-core-package-data"
+      - "{{ s3_bucket_prefix }}-bayesian-core-maven-index"
+      - "{{ s3_bucket_prefix }}-3scale-assets-z"
+
+  tasks:
+    - name: Delete S3 buckets
+      amazon.aws.s3_bucket:
+        name: "{{ s3_bucket_name }}"
+        region: "{{ aws_region }}"
+        state: absent
+      loop: "{{ s3_buckets }}"
+      loop_control:
+        loop_var: s3_bucket_name
