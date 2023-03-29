@@ -1,5 +1,9 @@
 ---
 - name: Create S3 buckets with bucket policy
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - ../../vars/common.yml
   vars:
     s3_bucket_prefix: "crda-dev"
     s3_buckets:

@@ -1,0 +1,4 @@
+aws_region: "eu-north-1"
+aws_iam_user: "crda-deployer"
+aws_account_id: "790531666491"
+aws_iam_user_arn: "arn:aws:iam::{{ aws_account_id }}:user/{{ aws_iam_user }}"

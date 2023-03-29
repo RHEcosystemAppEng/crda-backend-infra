@@ -1,1 +1,2 @@
 resources/ansible/infra-deploy/
+resources/ansible/playbooks/rds/vault

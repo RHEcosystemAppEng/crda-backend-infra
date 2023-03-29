@@ -36,6 +36,7 @@ CRDA uses the following components to deploy the backend
 - AWS account with permissions to manage S3 buckets and RDS databases.
 - The `AWS_PROFILE` [environment variable](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html#using-profiles) is used to install components.
 - `AWS_PROFILE` environment variable must be configured inside `virtualenv`.
+- By default `AWS_REGION` is set up to `eu-north-1`. To change the region, configure the paramater `aws_region` in the `resources/ansible/vars/common.yml` file.
 
 ### Configuring virtualenv
 
@@ -57,7 +58,7 @@ export AWS_PROFILE=<AWS_PROFILE_NAME>
 ### S3 buckets
 
 ```shell
-ansible-playbook resources/ansible/s3/s3.yml
+ansible-playbook resources/ansible/playbooks/s3/s3.yml
 ```
 
 ### RDS database
@@ -78,5 +79,5 @@ master_user_password: <MASTER_PASSWORD>
 Install RDS instance
 
 ```shell
-ansible-playbook --ask-vault-pass resources/ansible/rds/rds.yml
+ansible-playbook --ask-vault-pass resources/ansible/playbooks/rds/rds.yml
 ```

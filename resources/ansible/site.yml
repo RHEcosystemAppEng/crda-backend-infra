@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  become: false
-  gather_facts: false
-  tasks:
-    - name: "Configuring AWS S3 buckets"
-      ansible.builtin.import_playbook: ./playbooks/s3/s3.yml
-    - name: "Configuring AWS RDS instance"
-      ansible.builtin.import_playbook: ./playbooks/rds/rds.yml
