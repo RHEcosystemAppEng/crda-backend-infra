@@ -7,19 +7,3 @@
       ansible.builtin.import_playbook: ./playbooks/s3/s3.yml
     - name: "Configuring AWS RDS instance"
       ansible.builtin.import_playbook: ./playbooks/rds/rds.yml
-
----
-- name: Deploy S3 and RDS
-  hosts: localhost
-  connection: local
-  gather_facts: false
-
-  vars_files:
-    - aws_vars.yml
-
-  tasks:
-    - name: Deploy S3
-      include_playbook: s3.yml
-
-    - name: Deploy RDS
-      include_playbook: rds.yml
